@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu Assento</title>
+    <link rel="icon" type="image/.png" sizes="16x16"  href="./images/favicon.png">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <!-- PROGRAMAÇÃO - FILMES EM CARTAZ -->
+
+    <div id="grid-programacao" class="">
+        
+        <div class="container">
+            <h1>Nossa Programação</h1>
+
+            <div class="dateMovie">
+                <input type="date" class="dateSelected">
+            </div>
+
+            <div id="content-programacao"></div>
+        </div>
+
+        <button id="avancar" class="btn-avancar">Avançar</button>
+    </div>
+
+    <!-- SELECIONE OS LUGARES -->
+    <section class="container escolha hide">
+
+        <div class="col-left">
+            <div class="filmeEscolhido block"></div>
+            <div class="formaPagamento block">
+                <h2>Formas de Pagamento</h2>
+                <ul>
+                    <li id="seat" class="active">
+                        <h4>Escolha dos assentos</h4>
+                        <section class="containerSpan"></section>
+                    </li>
+                    <li id="type">
+                        <h4>Tipos de Ingressos</h4>
+                        <div class="gridEscolha ativo">
+                            <span class="ingressoEscolhido"></span>
+                            <span class="qtdaTotal"></span>
+                            <span id="resultado" style="color: #000;"></span>
+                            <span class="escolhaTipos" data-type="inteira" data-valor="3000">
+                                <span class="valor">
+                                    <span>Inteira</span>
+                                    <span class="price">R$ 30,00</span>
+                                    <span class="priceTotal hide">Ingresso <span class="valueUnit" data-unit="2480">$ 24,82</span> + Taxa de serviço <span class="valueTaxa" data-taxa="518">5,18</span></span>
+                                </span>
+                                <span class="quantidade">
+                                    <select onchange="calcularQtda();"></select>
+                                </span>
+                            </span>
+                            <span class="escolhaTipos" data-type="meia" data-valor="1500">
+                                <span class="valor">
+                                    <span>Meia</span>
+                                    <span class="price">R$ 15,00</span>
+                                    <span class="priceTotal hide">Ingresso <span class="valueUnit" data-unit="982">$ 9,82</span> + Taxa de serviço <span class="valueTaxa" data-taxa="518">5,18</span></span>
+                                </span>
+                                <span class="quantidade">
+                                    <select onchange="calcularQtda();"></select>
+                                </span>
+                            </span>
+                            <span class="escolhaTipos" data-type="meia-itau" data-valor="1500">
+                                <span class="valor">
+                                    <span>Meia Itaú</span>
+                                    <span class="price">R$ 15,00</span>
+                                    <span class="priceTotal hide">Ingresso <span class="valueUnit" data-unit="982">$ 9,82</span> + Taxa de serviço <span class="valueTaxa" data-taxa="518">5,18</span></span>
+                                </span>
+                                <span class="quantidade">
+                                    <select onchange="calcularQtda();"></select>
+                                </span>
+                            </span>
+                            <span class="escolhaTipos" data-type="meia-bradesco" data-valor="1500">
+                                <span class="valor">
+                                    <span>Meia Bradesco</span>
+                                    <span class="price">R$ 15,00</span>
+                                    <span class="priceTotal hide">Ingresso <span class="valueUnit" data-unit="982">$ 9,82</span> + Taxa de serviço <span class="valueTaxa" data-taxa="518">5,18</span></span>
+                                </span>
+                                <span class="quantidade">
+                                    <select onchange="calcularQtda();"></select>
+                                </span>
+                            </span>
+                        </div>
+                    </li>
+                    <!-- <li id="payments">
+                        <h4>Formas de Pagamento</h4>
+                    </li> -->
+                </ul>
+            </div>
+           <div class="resumoDaCompra block">
+                <h2>RESUMO DA COMPRA</h2>
+                <div class="ingressosAdquiridos">
+                    <div class="boxCompra">
+                        <span><i class="fa fa-ticket-alt"></i> Ingressos</span>
+                        <div class="dadosCompra hide">
+                            <div class="infoQtda">
+                                <div class="qtda"><span class="qtdaEscolhido">2</span>x</div>
+                                <h3>Ingresso(s)</h3>
+                            </div>
+                            <div class="text">Ingresso <span class="valorTotal"></span> + taxa R$ 5,18</div>
+                        </div>
+                    </div>
+                    <div class="priceTotal">R$ 0,00</div>
+                </div>
+                <div class="taxaAdiquiridos">
+                    <div class="taxa hide">
+                        <span>Total taxa:</span>
+                        <span class="resumoTaxa">R$ 0,00</span>
+                    </div>
+                    <div class="taxaTotal">                        
+                        <span><small>$</small> Total: </span>
+                        <span id="total">R$ 0,00</span>
+                    </div>                    
+                </div>
+           </div>
+        </div>
+        <div class="col-right">
+            <div id="information">
+                <h1>Assento(s)</h1>
+                <p>Selecione seu(s) lugare(s) clicando na(s) poltronas de acordo com a legenda abaixo do mapa da sala.</p>
+                <p>Para desmarcar seu(s) lugare(s) basta clicar novamente nas poltrona(s) reservada(s)</p>
+            </div>
+            <div id="assentosSelecionado">
+                <div class="info hide">
+                    <div class="div1 text-center text">Reservado</div>
+                    <div class="div2 text-center text">Escolhido(s) </div>
+                </div>
+            </div>
+            
+            <div id="assentos">
+                <div class="col column-left">
+                    <div class="rows chair-left">
+                        <div id="letra-a" class="letra">A</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="A" id="a-1" class="wheelchair">
+                            <input type="checkbox" data-text="A" id="a-2">
+                            <input type="checkbox" data-text="A" id="a-3">
+                            <input type="checkbox" data-text="A" id="a-4" class="wheelchair">
+                            <input type="checkbox" data-text="A" id="a-5" class="wheelchair">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-b" class="letra">B</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="B" id="b-1">
+                            <input type="checkbox" data-text="B" id="b-2">
+                            <input type="checkbox" data-text="B" id="b-3">
+                            <input type="checkbox" data-text="B" id="b-4">
+                            <input type="checkbox" data-text="B" id="b-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-c" class="letra">C</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="C" id="c-1">
+                            <input type="checkbox" data-text="C" id="c-2">
+                            <input type="checkbox" data-text="C" id="c-3">
+                            <input type="checkbox" data-text="C" id="c-4">
+                            <input type="checkbox" data-text="C" id="c-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-d" class="letra">D</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="D" id="d-1">
+                            <input type="checkbox" data-text="D" id="d-2">
+                            <input type="checkbox" data-text="D" id="d-3">
+                            <input type="checkbox" data-text="D" id="d-4">
+                            <input type="checkbox" data-text="D" id="d-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-e" class="letra">E</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="E" id="e-1">
+                            <input type="checkbox" data-text="E" id="e-2">
+                            <input type="checkbox" data-text="E" id="e-3">
+                            <input type="checkbox" data-text="E" id="e-4">
+                            <input type="checkbox" data-text="E" id="e-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-f" class="letra">F</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="F" id="f-1">
+                            <input type="checkbox" data-text="F" id="f-2">
+                            <input type="checkbox" data-text="F" id="f-3">
+                            <input type="checkbox" data-text="F" id="f-4">
+                            <input type="checkbox" data-text="F" id="f-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-g" class="letra">G</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="G" id="g-1">
+                            <input type="checkbox" data-text="G" id="g-2">
+                            <input type="checkbox" data-text="G" id="g-3">
+                            <input type="checkbox" data-text="G" id="g-4">
+                            <input type="checkbox" data-text="G" id="g-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-h" class="letra">H</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="H" id="h-1">
+                            <input type="checkbox" data-text="H" id="h-2">
+                            <input type="checkbox" data-text="H" id="h-3">
+                            <input type="checkbox" data-text="H" id="h-4">
+                            <input type="checkbox" data-text="H" id="h-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-i" class="letra">I</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="I" id="i-1">
+                            <input type="checkbox" data-text="I" id="i-2">
+                            <input type="checkbox" data-text="I" id="i-3">
+                            <input type="checkbox" data-text="I" id="i-4">
+                            <input type="checkbox" data-text="I" id="i-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-j" class="letra">J</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="J" id="j-1">
+                            <input type="checkbox" data-text="J" id="j-2">
+                            <input type="checkbox" data-text="J" id="j-3">
+                            <input type="checkbox" data-text="J" id="j-4">
+                            <input type="checkbox" data-text="J" id="j-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-l" class="letra">L</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="L" id="l-1">
+                            <input type="checkbox" data-text="L" id="l-2">
+                            <input type="checkbox" data-text="L" id="l-3">
+                            <input type="checkbox" data-text="L" id="l-4">
+                            <input type="checkbox" data-text="L" id="l-5">
+                        </div>
+                    </div>
+                    <!--<div class="rows chair-left">
+                        <div id="letra-m" class="letra">M</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="M" id="m-1">
+                            <input type="checkbox" data-text="M" id="m-2">
+                            <input type="checkbox" data-text="M" id="m-3">
+                            <input type="checkbox" data-text="M" id="m-4">
+                            <input type="checkbox" data-text="M" id="m-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-n" class="letra">N</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="N" id="n-1">
+                            <input type="checkbox" data-text="N" id="n-2">
+                            <input type="checkbox" data-text="N" id="n-3">
+                            <input type="checkbox" data-text="N" id="n-4">
+                            <input type="checkbox" data-text="N" id="n-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-o" class="letra">O</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="O" id="o-1">
+                            <input type="checkbox" data-text="O" id="o-2">
+                            <input type="checkbox" data-text="O" id="o-3">
+                            <input type="checkbox" data-text="O" id="o-4">
+                            <input type="checkbox" data-text="O" id="o-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-p" class="letra">P</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="P" id="p-1">
+                            <input type="checkbox" data-text="P" id="p-2">
+                            <input type="checkbox" data-text="P" id="p-3">
+                            <input type="checkbox" data-text="P" id="p-4">
+                            <input type="checkbox" data-text="P" id="p-5">
+                        </div>
+                    </div>
+                     <div class="rows chair-left">
+                        <div id="letra-q" class="letra">Q</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="Q" id="q-1">
+                            <input type="checkbox" data-text="Q" id="q-2">
+                            <input type="checkbox" data-text="Q" id="q-3">
+                            <input type="checkbox" data-text="Q" id="q-4">
+                            <input type="checkbox" data-text="Q" id="q-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-r" class="letra">R</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="R" id="r-1">
+                            <input type="checkbox" data-text="R" id="r-2">
+                            <input type="checkbox" data-text="R" id="r-3">
+                            <input type="checkbox" data-text="R" id="r-4">
+                            <input type="checkbox" data-text="R" id="r-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-s" class="letra">S</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="S" id="s-1">
+                            <input type="checkbox" data-text="S" id="s-2">
+                            <input type="checkbox" data-text="S" id="s-3">
+                            <input type="checkbox" data-text="S" id="s-4">
+                            <input type="checkbox" data-text="S" id="s-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-t" class="letra">T</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="T" id="t-1">
+                            <input type="checkbox" data-text="T" id="t-2">
+                            <input type="checkbox" data-text="T" id="t-3">
+                            <input type="checkbox" data-text="T" id="t-4">
+                            <input type="checkbox" data-text="T" id="t-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-u" class="letra">U</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="U" id="u-1">
+                            <input type="checkbox" data-text="U" id="u-2">
+                            <input type="checkbox" data-text="U" id="u-3">
+                            <input type="checkbox" data-text="U" id="u-4">
+                            <input type="checkbox" data-text="U" id="u-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-v" class="letra">V</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="V" id="v-1">
+                            <input type="checkbox" data-text="V" id="v-2">
+                            <input type="checkbox" data-text="V" id="v-3">
+                            <input type="checkbox" data-text="V" id="v-4">
+                            <input type="checkbox" data-text="V" id="v-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-x" class="letra">X</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="X" id="x-1">
+                            <input type="checkbox" data-text="X" id="x-2">
+                            <input type="checkbox" data-text="X" id="x-3">
+                            <input type="checkbox" data-text="X" id="x-4">
+                            <input type="checkbox" data-text="X" id="x-5">
+                        </div>
+                    </div>
+                    <div class="rows chair-left">
+                        <div id="letra-z" class="letra">Z</div>
+                        <div class="chair">
+                            <input type="checkbox" data-text="Z" id="z-1">
+                            <input type="checkbox" data-text="Z" id="z-2">
+                            <input type="checkbox" data-text="Z" id="z-3">
+                            <input type="checkbox" data-text="Z" id="z-4">
+                            <input type="checkbox" data-text="Z" id="z-5">
+                        </div>
+                    </div>-->
+                </div> 
+                <div class="col column-center">
+                <!-- <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="Z" id="z-6"> 
+                        <input type="checkbox" data-text="Z" id="z-7">
+                        <input type="checkbox" data-text="Z" id="z-8">
+                        <input type="checkbox" data-text="Z" id="z-9">
+                        <input type="checkbox" data-text="Z" id="z-10">
+                        <input type="checkbox" data-text="Z" id="z-11">
+                        <input type="checkbox" data-text="Z" id="z-12">
+                        <input type="checkbox" data-text="Z" id="z-13">
+                        <input type="checkbox" data-text="Z" id="z-14">
+                        <input type="checkbox" data-text="Z" id="z-15">
+                        <input type="checkbox" data-text="Z" id="z-16">
+                        <input type="checkbox" data-text="Z" id="z-17">
+                        <input type="checkbox" data-text="Z" id="z-18">
+                        <input type="checkbox" data-text="Z" id="z-19">
+                        <input type="checkbox" data-text="Z" id="z-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="X" id="x-6"> 
+                        <input type="checkbox" data-text="X" id="x-7">
+                        <input type="checkbox" data-text="X" id="x-8">
+                        <input type="checkbox" data-text="X" id="x-9">
+                        <input type="checkbox" data-text="X" id="x-10">
+                        <input type="checkbox" data-text="X" id="x-11">
+                        <input type="checkbox" data-text="X" id="x-12">
+                        <input type="checkbox" data-text="X" id="x-13">
+                        <input type="checkbox" data-text="X" id="x-14">
+                        <input type="checkbox" data-text="X" id="x-15">
+                        <input type="checkbox" data-text="X" id="x-16">
+                        <input type="checkbox" data-text="X" id="x-17">
+                        <input type="checkbox" data-text="X" id="x-18">
+                        <input type="checkbox" data-text="X" id="x-19">
+                        <input type="checkbox" data-text="X" id="x-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="V" id="v-6"> 
+                        <input type="checkbox" data-text="V" id="v-7">
+                        <input type="checkbox" data-text="V" id="v-8">
+                        <input type="checkbox" data-text="V" id="v-9">
+                        <input type="checkbox" data-text="V" id="v-10">
+                        <input type="checkbox" data-text="V" id="v-11">
+                        <input type="checkbox" data-text="V" id="v-12">
+                        <input type="checkbox" data-text="V" id="v-13">
+                        <input type="checkbox" data-text="V" id="v-14">
+                        <input type="checkbox" data-text="V" id="v-15">
+                        <input type="checkbox" data-text="V" id="v-16">
+                        <input type="checkbox" data-text="V" id="v-17">
+                        <input type="checkbox" data-text="V" id="v-18">
+                        <input type="checkbox" data-text="V" id="v-19">
+                        <input type="checkbox" data-text="V" id="v-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="U" id="u-6"> 
+                        <input type="checkbox" data-text="U" id="u-7">
+                        <input type="checkbox" data-text="U" id="u-8">
+                        <input type="checkbox" data-text="U" id="u-9">
+                        <input type="checkbox" data-text="U" id="u-10">
+                        <input type="checkbox" data-text="U" id="u-11">
+                        <input type="checkbox" data-text="U" id="u-12">
+                        <input type="checkbox" data-text="U" id="u-13">
+                        <input type="checkbox" data-text="U" id="u-14">
+                        <input type="checkbox" data-text="U" id="u-15">
+                        <input type="checkbox" data-text="U" id="u-16">
+                        <input type="checkbox" data-text="U" id="u-17">
+                        <input type="checkbox" data-text="U" id="u-18">
+                        <input type="checkbox" data-text="U" id="u-19">
+                        <input type="checkbox" data-text="U" id="u-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="T" id="t-6"> 
+                        <input type="checkbox" data-text="T" id="t-7">
+                        <input type="checkbox" data-text="T" id="t-8">
+                        <input type="checkbox" data-text="T" id="t-9">
+                        <input type="checkbox" data-text="T" id="t-10">
+                        <input type="checkbox" data-text="T" id="t-11">
+                        <input type="checkbox" data-text="T" id="t-12">
+                        <input type="checkbox" data-text="T" id="t-13">
+                        <input type="checkbox" data-text="T" id="t-14">
+                        <input type="checkbox" data-text="T" id="t-15">
+                        <input type="checkbox" data-text="T" id="t-16">
+                        <input type="checkbox" data-text="T" id="t-17">
+                        <input type="checkbox" data-text="T" id="t-18">
+                        <input type="checkbox" data-text="T" id="t-19">
+                        <input type="checkbox" data-text="T" id="t-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="S" id="s-6"> 
+                        <input type="checkbox" data-text="S" id="s-7">
+                        <input type="checkbox" data-text="S" id="s-8">
+                        <input type="checkbox" data-text="S" id="s-9">
+                        <input type="checkbox" data-text="S" id="s-10">
+                        <input type="checkbox" data-text="S" id="s-11">
+                        <input type="checkbox" data-text="S" id="s-12">
+                        <input type="checkbox" data-text="S" id="s-13">
+                        <input type="checkbox" data-text="S" id="s-14">
+                        <input type="checkbox" data-text="S" id="s-15">
+                        <input type="checkbox" data-text="S" id="s-16">
+                        <input type="checkbox" data-text="S" id="s-17">
+                        <input type="checkbox" data-text="S" id="s-18">
+                        <input type="checkbox" data-text="S" id="s-19">
+                        <input type="checkbox" data-text="S" id="s-20">
+                    </div>
+                </div>            
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="R" id="r-6"> 
+                        <input type="checkbox" data-text="R" id="r-7">
+                        <input type="checkbox" data-text="R" id="r-8">
+                        <input type="checkbox" data-text="R" id="r-9">
+                        <input type="checkbox" data-text="R" id="r-10">
+                        <input type="checkbox" data-text="R" id="r-11">
+                        <input type="checkbox" data-text="R" id="r-12">
+                        <input type="checkbox" data-text="R" id="r-13">
+                        <input type="checkbox" data-text="R" id="r-14">
+                        <input type="checkbox" data-text="R" id="r-15">
+                        <input type="checkbox" data-text="R" id="r-16">
+                        <input type="checkbox" data-text="R" id="r-17">
+                        <input type="checkbox" data-text="R" id="r-18">
+                        <input type="checkbox" data-text="R" id="r-19">
+                        <input type="checkbox" data-text="R" id="r-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="Q" id="q-6"> 
+                        <input type="checkbox" data-text="Q" id="q-7">
+                        <input type="checkbox" data-text="Q" id="q-8">
+                        <input type="checkbox" data-text="Q" id="q-9">
+                        <input type="checkbox" data-text="Q" id="q-10">
+                        <input type="checkbox" data-text="Q" id="q-11">
+                        <input type="checkbox" data-text="Q" id="q-12">
+                        <input type="checkbox" data-text="Q" id="q-13">
+                        <input type="checkbox" data-text="Q" id="q-14">
+                        <input type="checkbox" data-text="Q" id="q-15">
+                        <input type="checkbox" data-text="Q" id="q-16">
+                        <input type="checkbox" data-text="Q" id="q-17">
+                        <input type="checkbox" data-text="Q" id="q-18">
+                        <input type="checkbox" data-text="Q" id="q-19">
+                        <input type="checkbox" data-text="Q" id="q-20">
+                    </div>
+                </div> 
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="P" id="p-6"> 
+                        <input type="checkbox" data-text="P" id="p-7">
+                        <input type="checkbox" data-text="P" id="p-8">
+                        <input type="checkbox" data-text="P" id="p-9">
+                        <input type="checkbox" data-text="P" id="p-10">
+                        <input type="checkbox" data-text="P" id="p-11">
+                        <input type="checkbox" data-text="P" id="p-12">
+                        <input type="checkbox" data-text="P" id="p-13">
+                        <input type="checkbox" data-text="P" id="p-14">
+                        <input type="checkbox" data-text="P" id="p-15">
+                        <input type="checkbox" data-text="P" id="p-16">
+                        <input type="checkbox" data-text="P" id="p-17">
+                        <input type="checkbox" data-text="P" id="p-18">
+                        <input type="checkbox" data-text="P" id="p-19">
+                        <input type="checkbox" data-text="P" id="p-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="O" id="o-6"> 
+                        <input type="checkbox" data-text="O" id="o-7">
+                        <input type="checkbox" data-text="O" id="o-8">
+                        <input type="checkbox" data-text="O" id="o-9">
+                        <input type="checkbox" data-text="O" id="o-10">
+                        <input type="checkbox" data-text="O" id="o-11">
+                        <input type="checkbox" data-text="O" id="o-12">
+                        <input type="checkbox" data-text="O" id="o-13">
+                        <input type="checkbox" data-text="O" id="o-14">
+                        <input type="checkbox" data-text="O" id="o-15">
+                        <input type="checkbox" data-text="O" id="o-16">
+                        <input type="checkbox" data-text="O" id="o-17">
+                        <input type="checkbox" data-text="O" id="o-18">
+                        <input type="checkbox" data-text="O" id="o-19">
+                        <input type="checkbox" data-text="O" id="o-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="N" id="n-6"> 
+                        <input type="checkbox" data-text="N" id="n-7">
+                        <input type="checkbox" data-text="N" id="n-8">
+                        <input type="checkbox" data-text="N" id="n-9">
+                        <input type="checkbox" data-text="N" id="n-10">
+                        <input type="checkbox" data-text="N" id="n-11">
+                        <input type="checkbox" data-text="N" id="n-12">
+                        <input type="checkbox" data-text="N" id="n-13">
+                        <input type="checkbox" data-text="N" id="n-14">
+                        <input type="checkbox" data-text="N" id="n-15">
+                        <input type="checkbox" data-text="N" id="n-16">
+                        <input type="checkbox" data-text="N" id="n-17">
+                        <input type="checkbox" data-text="N" id="n-18">
+                        <input type="checkbox" data-text="N" id="n-19">
+                        <input type="checkbox" data-text="N" id="n-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="M" id="m-6"> 
+                        <input type="checkbox" data-text="M" id="m-7">
+                        <input type="checkbox" data-text="M" id="m-8">
+                        <input type="checkbox" data-text="M" id="m-9">
+                        <input type="checkbox" data-text="M" id="m-10">
+                        <input type="checkbox" data-text="M" id="m-11">
+                        <input type="checkbox" data-text="M" id="m-12">
+                        <input type="checkbox" data-text="M" id="m-13">
+                        <input type="checkbox" data-text="M" id="m-14">
+                        <input type="checkbox" data-text="M" id="m-15">
+                        <input type="checkbox" data-text="M" id="m-16">
+                        <input type="checkbox" data-text="M" id="m-17">
+                        <input type="checkbox" data-text="M" id="m-18">
+                        <input type="checkbox" data-text="M" id="m-19">
+                        <input type="checkbox" data-text="M" id="m-20">
+                    </div>
+                </div>-->
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="L" id="l-6"> 
+                        <input type="checkbox" data-text="L" id="l-7">
+                        <input type="checkbox" data-text="L" id="l-8">
+                        <input type="checkbox" data-text="L" id="l-9">
+                        <input type="checkbox" data-text="L" id="l-10">
+                        <input type="checkbox" data-text="L" id="l-11">
+                        <input type="checkbox" data-text="L" id="l-12">
+                        <input type="checkbox" data-text="L" id="l-13">
+                        <input type="checkbox" data-text="L" id="l-14">
+                        <input type="checkbox" data-text="L" id="l-15">
+                        <input type="checkbox" data-text="L" id="l-16">
+                        <input type="checkbox" data-text="L" id="l-17">
+                        <input type="checkbox" data-text="L" id="l-18">
+                        <input type="checkbox" data-text="L" id="l-19">
+                        <input type="checkbox" data-text="L" id="l-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="J" id="j-6"> 
+                        <input type="checkbox" data-text="J" id="j-7">
+                        <input type="checkbox" data-text="J" id="j-8">
+                        <input type="checkbox" data-text="J" id="j-9">
+                        <input type="checkbox" data-text="J" id="j-10">
+                        <input type="checkbox" data-text="J" id="j-11">
+                        <input type="checkbox" data-text="J" id="j-12">
+                        <input type="checkbox" data-text="J" id="j-13">
+                        <input type="checkbox" data-text="J" id="j-14">
+                        <input type="checkbox" data-text="J" id="j-15">
+                        <input type="checkbox" data-text="J" id="j-16">
+                        <input type="checkbox" data-text="J" id="j-17">
+                        <input type="checkbox" data-text="J" id="j-18">
+                        <input type="checkbox" data-text="J" id="j-19">
+                        <input type="checkbox" data-text="J" id="j-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="I" id="i-6"> 
+                        <input type="checkbox" data-text="I" id="i-7">
+                        <input type="checkbox" data-text="I" id="i-8">
+                        <input type="checkbox" data-text="I" id="i-9">
+                        <input type="checkbox" data-text="I" id="i-10">
+                        <input type="checkbox" data-text="I" id="i-11">
+                        <input type="checkbox" data-text="I" id="i-12">
+                        <input type="checkbox" data-text="I" id="i-13">
+                        <input type="checkbox" data-text="I" id="i-14">
+                        <input type="checkbox" data-text="I" id="i-15">
+                        <input type="checkbox" data-text="I" id="i-16">
+                        <input type="checkbox" data-text="I" id="i-17">
+                        <input type="checkbox" data-text="I" id="i-18">
+                        <input type="checkbox" data-text="I" id="i-19">
+                        <input type="checkbox" data-text="I" id="i-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="H" id="h-6"> 
+                        <input type="checkbox" data-text="H" id="h-7">
+                        <input type="checkbox" data-text="H" id="h-8">
+                        <input type="checkbox" data-text="H" id="h-9">
+                        <input type="checkbox" data-text="H" id="h-10">
+                        <input type="checkbox" data-text="H" id="h-11">
+                        <input type="checkbox" data-text="H" id="h-12">
+                        <input type="checkbox" data-text="H" id="h-13">
+                        <input type="checkbox" data-text="H" id="h-14">
+                        <input type="checkbox" data-text="H" id="h-15">
+                        <input type="checkbox" data-text="H" id="h-16">
+                        <input type="checkbox" data-text="H" id="h-17">
+                        <input type="checkbox" data-text="H" id="h-18">
+                        <input type="checkbox" data-text="H" id="h-19">
+                        <input type="checkbox" data-text="H" id="h-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="G" id="g-6"> 
+                        <input type="checkbox" data-text="G" id="g-7">
+                        <input type="checkbox" data-text="G" id="g-8">
+                        <input type="checkbox" data-text="G" id="g-9">
+                        <input type="checkbox" data-text="G" id="g-10">
+                        <input type="checkbox" data-text="G" id="g-11">
+                        <input type="checkbox" data-text="G" id="g-12">
+                        <input type="checkbox" data-text="G" id="g-13">
+                        <input type="checkbox" data-text="G" id="g-14">
+                        <input type="checkbox" data-text="G" id="g-15">
+                        <input type="checkbox" data-text="G" id="g-16">
+                        <input type="checkbox" data-text="G" id="g-17">
+                        <input type="checkbox" data-text="G" id="g-18">
+                        <input type="checkbox" data-text="G" id="g-19">
+                        <input type="checkbox" data-text="G" id="g-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="F" id="f-6"> 
+                        <input type="checkbox" data-text="F" id="f-7">
+                        <input type="checkbox" data-text="F" id="f-8">
+                        <input type="checkbox" data-text="F" id="f-9">
+                        <input type="checkbox" data-text="F" id="f-10">
+                        <input type="checkbox" data-text="F" id="f-11">
+                        <input type="checkbox" data-text="F" id="f-12">
+                        <input type="checkbox" data-text="F" id="f-13">
+                        <input type="checkbox" data-text="F" id="f-14">
+                        <input type="checkbox" data-text="F" id="f-15">
+                        <input type="checkbox" data-text="F" id="f-16">
+                        <input type="checkbox" data-text="F" id="f-17">
+                        <input type="checkbox" data-text="F" id="f-18">
+                        <input type="checkbox" data-text="F" id="f-19">
+                        <input type="checkbox" data-text="F" id="f-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="E" id="e-6"> 
+                        <input type="checkbox" data-text="E" id="e-7">
+                        <input type="checkbox" data-text="E" id="e-8">
+                        <input type="checkbox" data-text="E" id="e-9">
+                        <input type="checkbox" data-text="E" id="e-10">
+                        <input type="checkbox" data-text="E" id="e-11">
+                        <input type="checkbox" data-text="E" id="e-12">
+                        <input type="checkbox" data-text="E" id="e-13">
+                        <input type="checkbox" data-text="E" id="e-14">
+                        <input type="checkbox" data-text="E" id="e-15">
+                        <input type="checkbox" data-text="E" id="e-16">
+                        <input type="checkbox" data-text="E" id="e-17">
+                        <input type="checkbox" data-text="E" id="e-18">
+                        <input type="checkbox" data-text="E" id="e-19">
+                        <input type="checkbox" data-text="E" id="e-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="D" id="d-6"> 
+                        <input type="checkbox" data-text="D" id="d-7">
+                        <input type="checkbox" data-text="D" id="d-8">
+                        <input type="checkbox" data-text="D" id="d-9">
+                        <input type="checkbox" data-text="D" id="d-10">
+                        <input type="checkbox" data-text="D" id="d-11">
+                        <input type="checkbox" data-text="D" id="d-12">
+                        <input type="checkbox" data-text="D" id="d-13">
+                        <input type="checkbox" data-text="D" id="d-14">
+                        <input type="checkbox" data-text="D" id="d-15">
+                        <input type="checkbox" data-text="D" id="d-16">
+                        <input type="checkbox" data-text="D" id="d-17">
+                        <input type="checkbox" data-text="D" id="d-18">
+                        <input type="checkbox" data-text="D" id="d-19">
+                        <input type="checkbox" data-text="D" id="d-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="C" id="c-6"> 
+                        <input type="checkbox" data-text="C" id="c-7">
+                        <input type="checkbox" data-text="C" id="c-8">
+                        <input type="checkbox" data-text="C" id="c-9">
+                        <input type="checkbox" data-text="C" id="c-10">
+                        <input type="checkbox" data-text="C" id="c-11">
+                        <input type="checkbox" data-text="C" id="c-12">
+                        <input type="checkbox" data-text="C" id="c-13">
+                        <input type="checkbox" data-text="C" id="c-14">
+                        <input type="checkbox" data-text="C" id="c-15">
+                        <input type="checkbox" data-text="C" id="c-16">
+                        <input type="checkbox" data-text="C" id="c-17">
+                        <input type="checkbox" data-text="C" id="c-18">
+                        <input type="checkbox" data-text="C" id="c-19">
+                        <input type="checkbox" data-text="C" id="c-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="B" id="b-6"> 
+                        <input type="checkbox" data-text="B" id="b-7">
+                        <input type="checkbox" data-text="B" id="b-8">
+                        <input type="checkbox" data-text="B" id="b-9">
+                        <input type="checkbox" data-text="B" id="b-10">
+                        <input type="checkbox" data-text="B" id="b-11">
+                        <input type="checkbox" data-text="B" id="b-12">
+                        <input type="checkbox" data-text="B" id="b-13">
+                        <input type="checkbox" data-text="B" id="b-14">
+                        <input type="checkbox" data-text="B" id="b-15">
+                        <input type="checkbox" data-text="B" id="b-16">
+                        <input type="checkbox" data-text="B" id="b-17">
+                        <input type="checkbox" data-text="B" id="b-18">
+                        <input type="checkbox" data-text="B" id="b-19">
+                        <input type="checkbox" data-text="B" id="b-20">
+                    </div>
+                </div>
+                <div class="rows chair-center">
+                    <div class="chair">
+                        <input type="checkbox" data-text="A" id="a-6"> 
+                        <input type="checkbox" data-text="A" id="a-7" class="wheelchair">
+                        <input type="checkbox" data-text="A" id="a-8" class="wheelchair">
+                        <input type="checkbox" data-text="A" id="a-9" class="wheelchair">
+                        <input type="checkbox" data-text="A" id="a-10">
+                        <input type="checkbox" data-text="A" id="a-11">
+                        <input type="checkbox" data-text="A" id="a-12" class="wheelchair">
+                        <input type="checkbox" data-text="A" id="a-13" class="wheelchair">
+                        <input type="checkbox" data-text="A" id="a-14" class="wheelchair">
+                        <input type="checkbox" data-text="A" id="a-15">
+                        <input type="checkbox" data-text="A" id="a-16">
+                        <input type="checkbox" data-text="A" id="a-17" class="wheelchair">
+                        <input type="checkbox" data-text="A" id="a-18" class="wheelchair">
+                        <input type="checkbox" data-text="A" id="a-19" class="wheelchair">
+                        <input type="checkbox" data-text="A" id="a-20">
+                    </div>
+                </div>
+                </div>
+                <div class="col column-right">                 
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="A" id="a-21" class="wheelchair">
+                            <input type="checkbox" data-text="A" id="a-22" class="wheelchair">
+                            <input type="checkbox" data-text="A" id="a-23">
+                            <input type="checkbox" data-text="A" id="a-24">
+                            <input type="checkbox" data-text="A" id="a-25" class="wheelchair">
+                        </div>
+                        <div id="letra-b" class="letra">A</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="B" id="b-21">
+                            <input type="checkbox" data-text="B" id="b-22">
+                            <input type="checkbox" data-text="B" id="b-23">
+                            <input type="checkbox" data-text="B" id="b-24">
+                            <input type="checkbox" data-text="B" id="b-25">
+                        </div>
+                        <div id="letra-c" class="letra">B</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="c" id="c-21">
+                            <input type="checkbox" data-text="C" id="c-22">
+                            <input type="checkbox" data-text="C" id="c-23">
+                            <input type="checkbox" data-text="C" id="c-24">
+                            <input type="checkbox" data-text="C" id="c-25">
+                        </div>
+                        <div id="letra-d" class="letra">C</div>
+                    </div>
+                    <div class="rows chair-right">                    
+                        <div class="chair">
+                            <input type="checkbox" data-text="D" id="d-21">
+                            <input type="checkbox" data-text="D" id="d-22">
+                            <input type="checkbox" data-text="D" id="d-23">
+                            <input type="checkbox" data-text="D" id="d-24">
+                            <input type="checkbox" data-text="D" id="d-25">
+                        </div>
+                        <div id="letra-e" class="letra">D</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="E" id="e-21">
+                            <input type="checkbox" data-text="E" id="e-22">
+                            <input type="checkbox" data-text="E" id="e-23">
+                            <input type="checkbox" data-text="E" id="e-24">
+                            <input type="checkbox" data-text="E" id="e-25">
+                        </div>
+                        <div id="letra-f" class="letra">E</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="F" id="f-21">
+                            <input type="checkbox" data-text="F" id="f-22">
+                            <input type="checkbox" data-text="F" id="f-23">
+                            <input type="checkbox" data-text="F" id="f-24">
+                            <input type="checkbox" data-text="F" id="f-25">
+                        </div>
+                        <div id="letra-g" class="letra">F</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="G" id="g-21">
+                            <input type="checkbox" data-text="G" id="g-22">
+                            <input type="checkbox" data-text="G" id="g-23">
+                            <input type="checkbox" data-text="G" id="g-24">
+                            <input type="checkbox" data-text="G" id="g-25">
+                        </div>
+                        <div id="letra-h" class="letra">G</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="H" id="h-21">
+                            <input type="checkbox" data-text="H" id="h-22">
+                            <input type="checkbox" data-text="H" id="h-23">
+                            <input type="checkbox" data-text="H" id="h-24">
+                            <input type="checkbox" data-text="H" id="h-25">
+                        </div>
+                        <div id="letra-i" class="letra">H</div>
+                    </div>
+                    <div class="rows chair-right">                    
+                        <div class="chair">
+                            <input type="checkbox" data-text="I" id="i-21">
+                            <input type="checkbox" data-text="I" id="i-22">
+                            <input type="checkbox" data-text="I" id="i-23">
+                            <input type="checkbox" data-text="I" id="i-24">
+                            <input type="checkbox" data-text="I" id="i-25">
+                        </div>
+                        <div id="letra-j" class="letra">I</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="J" id="j-21">
+                            <input type="checkbox" data-text="J" id="j-22">
+                            <input type="checkbox" data-text="J" id="j-23">
+                            <input type="checkbox" data-text="J" id="j-24">
+                            <input type="checkbox" data-text="J" id="j-25">
+                        </div>
+                        <div id="letra-l" class="letra">J</div>
+                    </div>
+                    <div class="rows chair-right">                    
+                        <div class="chair">
+                            <input type="checkbox" data-text="L" id="l-21">
+                            <input type="checkbox" data-text="L" id="l-22">
+                            <input type="checkbox" data-text="L" id="l-23">
+                            <input type="checkbox" data-text="L" id="l-24">
+                            <input type="checkbox" data-text="L" id="l-25">
+                        </div>
+                        <div id="letra-m" class="letra">L</div>
+                    </div>
+                   <!--  <div class="rows chair-right">                    
+                        <div class="chair">
+                            <input type="checkbox" data-text="M" id="m-21">
+                            <input type="checkbox" data-text="M" id="m-22">
+                            <input type="checkbox" data-text="M" id="m-23">
+                            <input type="checkbox" data-text="M" id="m-24">
+                            <input type="checkbox" data-text="M" id="m-25">
+                        </div>
+                        <div id="letra-n" class="letra">M</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="N" id="n-21">
+                            <input type="checkbox" data-text="N" id="n-22">
+                            <input type="checkbox" data-text="N" id="n-23">
+                            <input type="checkbox" data-text="N" id="n-24">
+                            <input type="checkbox" data-text="N" id="n-25">
+                        </div>
+                        <div id="letra-o" class="letra">N</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="O" id="o-21">
+                            <input type="checkbox" data-text="O" id="o-22">
+                            <input type="checkbox" data-text="O" id="o-23">
+                            <input type="checkbox" data-text="O" id="o-24">
+                            <input type="checkbox" data-text="O" id="o-25">
+                        </div>
+                        <div id="letra-p" class="letra">O</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="P" id="p-21">
+                            <input type="checkbox" data-text="P" id="p-22">
+                            <input type="checkbox" data-text="P" id="p-23">
+                            <input type="checkbox" data-text="P" id="p-24">
+                            <input type="checkbox" data-text="P" id="p-25">
+                        </div>
+                        <div id="letra-q" class="letra">P</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="Q" id="q-21">
+                            <input type="checkbox" data-text="Q" id="q-22">
+                            <input type="checkbox" data-text="Q" id="q-23">
+                            <input type="checkbox" data-text="Q" id="q-24">
+                            <input type="checkbox" data-text="Q" id="q-25">
+                        </div>
+                        <div id="letra-r" class="letra">Q</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="R" id="r-21">
+                            <input type="checkbox" data-text="R" id="r-22">
+                            <input type="checkbox" data-text="R" id="r-23">
+                            <input type="checkbox" data-text="R" id="r-24">
+                            <input type="checkbox" data-text="R" id="r-25">
+                        </div>
+                        <div id="letra-s" class="letra">R</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="S" id="s-21">
+                            <input type="checkbox" data-text="S" id="s-22">
+                            <input type="checkbox" data-text="S" id="s-23">
+                            <input type="checkbox" data-text="S" id="s-24">
+                            <input type="checkbox" data-text="S" id="s-25">
+                        </div>
+                        <div id="letra-t" class="letra">S</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="T" id="t-21">
+                            <input type="checkbox" data-text="T" id="t-22">
+                            <input type="checkbox" data-text="T" id="t-23">
+                            <input type="checkbox" data-text="T" id="t-24">
+                            <input type="checkbox" data-text="T" id="t-25">
+                        </div>
+                        <div id="letra-u" class="letra">T</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="U" id="u-21">
+                            <input type="checkbox" data-text="U" id="u-22">
+                            <input type="checkbox" data-text="U" id="u-23">
+                            <input type="checkbox" data-text="U" id="u-24">
+                            <input type="checkbox" data-text="U" id="u-25">
+                        </div>
+                        <div id="letra-v" class="letra">U</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="V" id="v-21">
+                            <input type="checkbox" data-text="V" id="v-22">
+                            <input type="checkbox" data-text="V" id="v-23">
+                            <input type="checkbox" data-text="V" id="v-24">
+                            <input type="checkbox" data-text="V" id="v-25">
+                        </div>
+                        <div id="letra-x" class="letra">V</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="X" id="x-21">
+                            <input type="checkbox" data-text="X" id="x-22">
+                            <input type="checkbox" data-text="X" id="x-23">
+                            <input type="checkbox" data-text="X" id="x-24">
+                            <input type="checkbox" data-text="X" id="x-25">
+                        </div>
+                        <div id="letra-z" class="letra">X</div>
+                    </div>
+                    <div class="rows chair-right">
+                        <div class="chair">
+                            <input type="checkbox" data-text="Z" id="z-21">
+                            <input type="checkbox" data-text="Z" id="z-22">
+                            <input type="checkbox" data-text="Z" id="z-23">
+                            <input type="checkbox" data-text="Z" id="z-24">
+                            <input type="checkbox" data-text="Z" id="z-25">
+                        </div>
+                        <div id="letra-z" class="letra">Z</div>
+                    </div> -->
+                </div>        
+            </div>
+    
+            <div class="screen">
+                <h2>Tela do Cinema</h2>
+            </div>
+    
+            <div id="btnContainers">
+                <div id="voltar" class="btn voltar">Voltar</div>
+                <div id="finalizar" class="btn finalizar">Finalizar</div>
+            </div>
+    
+            <section class="legend">
+                <div>
+                    <h3>Legenda</h3>
+                    <span>Poltronas</span>
+                    <ul>
+                        <li>
+                            <span class="icon icon-livre fa fa-circle"></span>
+                            <span class="text">Livre</span>
+                        </li>
+                        <li>
+                            <span class="icon icon-escolhido fa fa-circle"></span>
+                            <span class="text">Escolhida</span>
+                        </li>
+                        <li>
+                            <span class="icon icon-oculpado fa fa-circle"></span>
+                            <span class="text">Ocupada</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div id="visualizar" class="btn visualizar">Ingressos Selecionados</div>
+                </div>
+            </section>
+        </div>
+
+    </section>
+
+    <!-- Template compra -->
+    <div id="containerTicket" class="hide">
+        <span id="close">X</span>
+        <div class="ticketImpresso"></div>
+    </div>
+
+    <!--Template filmes -->
+    <div class="gridMovie hide">
+        <input type="hidden" class="poster" data-poster="">
+        <div class="gridTitle">
+            <h2>A Pequena Sereia</h2>
+            <span class="legenda">10</span>
+        </div>
+        <div class="gridSalas"></div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,824 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+/*
+font-family: 'Dancing Script', cursive;
+font-family: 'Caprasimo', cursive;
+font-family: 'Lilita One', cursive;
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+body{
+    background: url('../images/bg.png') repeat top left;
+    font-family: 'Lato', sans-serif;
+}
+
+#grid-programacao{
+    width: 90vw;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+#grid-programacao h1{
+    padding-block: 2rem;
+    color: #303030;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+#grid-programacao h1:before{
+    content: "\f008";
+    font-weight: 900;
+    font-family: 'Font Awesome 5 Free';
+    margin-right: 1rem;
+    color: #303030;
+}
+
+#grid-programacao .dateMovie{
+    width: 100%;
+}
+
+#grid-programacao .dateMovie input{
+    width: 40%;
+    border: 1px solid #CCC;
+    padding: 0.6rem;
+    color: #777;
+    margin-bottom: 1.5rem;
+}
+
+#grid-programacao .gridMovie{
+    border: 1px solid #d2d2d2;
+    border-radius: 4px;
+    box-shadow: 3px 3px 20px #00000047;
+    margin-bottom: 2rem;
+}
+
+#grid-programacao .gridMovie .gridTitle{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.7rem 1rem;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 99%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+
+@media(max-width:767px){
+    #grid-programacao .gridMovie .gridTitle{
+        display: inline-block;
+        width: 100%;
+    }   
+}
+
+
+#grid-programacao .gridMovie .gridTitle h2{
+    color: #4e4e4e;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+#grid-programacao .gridMovie .gridTitle .legenda{
+    background: blue;
+    color: #FFF;
+    line-height: 1.5;
+    padding-inline: 0.4rem;
+    border-radius: 4px;
+}
+
+#grid-programacao .gridMovie .gridSalas{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.7rem 1rem;
+    background: #FFF;
+}
+
+#grid-programacao .gridMovie .gridSalas .period{
+    display: flex;
+    border-bottom: 1px solid #d2d2d2;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+}
+
+@media(max-width:767px){
+    #grid-programacao .gridMovie .gridSalas .period{
+        display: block;
+    }
+}
+
+#grid-programacao .gridMovie .gridSalas .period:last-child{
+    border-bottom: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#grid-programacao .gridMovie .gridSalas .period h2{
+    margin-right: 1rem;
+    color: #4e4e4e;
+    font-weight: normal;
+    font-size: 1.3rem;
+    min-width: 62px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#grid-programacao .gridMovie .gridSalas .period span{
+    font-size: 0.75rem;
+    background: #3333;
+    width: 75px;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 3px;
+    margin-right: 1rem;
+    padding: 3px 0.5rem;
+    
+}
+
+#grid-programacao .gridMovie .gridSalas .period span.legendado{
+    background: #666;
+    color: #FFF;
+}
+
+#grid-programacao .gridMovie .gridSalas .period .hours{
+    border: 2px solid #b6b6b6;
+    background: transparent;
+    margin-inline: 0.35rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px; 
+    cursor: pointer;
+    transition: all 0.3s ease-in;   
+}
+
+#grid-programacao .gridMovie .gridSalas .period .hours.active,
+#grid-programacao .gridMovie .gridSalas .period .hours:hover{
+    background: #ff3356;
+    color: #FFF;
+    border-color: #ff3356;
+}
+
+.btn-avancar{
+    background: #ff3356;
+    color: #FFF;
+    padding: 0.75rem 2rem;
+    border: 0;
+    border-radius: 4px;
+    float: right;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-weight:bold;
+    cursor: pointer;
+}
+
+.container{
+    width: 90vw;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.container.escolha{
+    width: 90vw;
+    max-width: 1200px;
+    display: flex;
+    margin-top: 1.5rem;
+}
+
+.hide{
+    display: none !important;
+}
+
+.col-left{
+    width: 30%;
+    margin-right: 5%;
+}
+
+.col-left .block{
+    border-bottom: 1px solid #d6d3d3;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.col-left .block h2{
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    line-height: 1;
+    display: inline-block;
+}
+
+.filmeEscolhido{
+    display: flex;
+    align-items: flex-start;
+}
+
+.filmeEscolhido .imagem{
+    margin-right: 1rem;
+    width: 23%;
+}
+
+.filmeEscolhido .imagem img{
+    width: 100%;
+}
+
+.filmeEscolhido .description{
+    display: flex;
+    flex-direction: column;
+}
+
+.filmeEscolhido .description span{
+    color: #666;
+    font-weight: normal;
+    margin-bottom: 0.4rem;
+    font-size: 0.87rem;
+}
+
+.formaPagamento ul{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.formaPagamento ul li{
+    margin-bottom: 3px;
+    background: #ebebeb;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0.3;
+    pointer-events: none;
+    border-left: 4px solid #333;
+    position: relative;
+}
+
+.formaPagamento ul li.active{
+    background: #ff3356;
+    color: #FFF;
+    opacity: 1;
+    pointer-events:inherit;
+    border-color: #bf2b44;
+}
+
+.formaPagamento ul li h4{
+    padding: 1rem;
+}
+
+.formaPagamento ul li .containerSpan.show{
+    padding: 0 1rem 1rem 1rem;
+}
+
+#type .escolhaTipos{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFF;
+    color: #666;
+    padding: 0.3rem 1rem;
+}
+
+#type .escolhaTipos .valor{
+    display: flex;
+    flex-direction: column;
+}
+
+#type .escolhaTipos .valor .price,
+#type .escolhaTipos .valor .priceTotal{
+    font-size: 10px;
+    color: #999;
+    text-transform: none;
+}
+
+#type .escolhaTipos .valor .priceTotal{
+    /* display: none; */
+}
+
+#type .escolhaTipos select{
+    border: 1px solid #CCC;
+    padding: 6px;
+    border-radius: 3px;
+    color: #999;
+}
+
+.gridEscolha{
+    padding-bottom: 1rem;
+    background: #FFF;
+}
+
+.gridEscolha.ativo{
+    display: none;
+}
+
+.gridEscolha .qtdaTotal{
+    background: #FFF;
+    width: 100%;
+    display: none;
+    color: #666;
+    padding-inline: 1rem;
+}
+
+.gridEscolha .ingressoEscolhido{
+    width: 100%;
+    display: block;
+    padding: 1rem 1rem 0.5rem;
+    background: #FFF;
+    color: #666;
+}
+
+.gridEscolha .ingressoEscolhido span{
+    background: #CCC;
+    margin: 0 3px 4px 0;
+    color: #999;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+    text-align: center;
+    font-size: 8px;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+.resumoDaCompra .ingressosAdquiridos{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #d6d3d3;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.resumoDaCompra .ingressosAdquiridos .boxCompra > span{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.resumoDaCompra .ingressosAdquiridos .boxCompra .dadosCompra{
+    margin-block: 0.5rem;
+}
+
+.resumoDaCompra .ingressosAdquiridos .boxCompra .dadosCompra .infoQtda{
+    display: flex;
+    align-items: center;
+}
+
+.resumoDaCompra .ingressosAdquiridos .boxCompra .dadosCompra .infoQtda h3{
+    font-size: 0.8rem;
+}
+
+.resumoDaCompra .ingressosAdquiridos .boxCompra .dadosCompra .text{
+    color: #666;
+}
+
+.resumoDaCompra .ingressosAdquiridos .boxCompra .dadosCompra .qtda{
+    color: #ff3356;
+    margin-right: 0.2rem;
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+
+.resumoDaCompra .ingressosAdquiridos .boxCompra .dadosCompra .text{
+    font-size: 0.8rem;
+
+}
+
+.taxaAdiquiridos .taxa{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.taxaAdiquiridos .taxaTotal{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+}
+
+.taxaAdiquiridos .taxaTotal span{
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.taxaAdiquiridos .taxaTotal small{
+    border: 1px solid #333;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+}
+
+.col-right{
+    width: 65%;
+}
+
+#information h1{
+    margin-bottom: 1rem;
+}
+
+#information p{
+    line-height: 1.2;
+}
+
+#assentosSelecionado .info{
+    display: flex;
+    justify-content: end;
+}
+
+#assentosSelecionado .info div{
+    width: 20%;
+    margin-bottom: 0.75rem;
+}
+
+#assentosSelecionado .text-center{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#assentosSelecionado .rows div:not(.text){
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding-block: 0.75rem;
+}
+
+#assentosSelecionado .rows i{
+    margin-right: 10px;
+}
+
+#assentosSelecionado .rows {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+#assentosSelecionado .rows .div1 { grid-area: 1 / 4 / 2 / 5; }
+#assentosSelecionado .rows .div2 { grid-area: 1 / 5 / 2 / 6; }
+#assentosSelecionado .rows .div3 { grid-area: 2 / 1 / 3 / 2; }
+#assentosSelecionado .rows .div4 { grid-area: 2 / 2 / 3 / 3; }
+#assentosSelecionado .rows .div5 { grid-area: 2 / 3 / 3 / 4; }
+#assentosSelecionado .rows .div6 { grid-area: 2 / 4 / 3 / 5; }
+#assentosSelecionado .rows .div7 { grid-area: 2 / 5 / 3 / 6; }
+
+
+.screen{
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.screen h2{
+    display: block;
+    background: #333;
+    color: #FFF;
+    padding: 0.4rem 4rem;
+    border-radius: 3px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+#assentos{
+    display: flex;
+    justify-content: space-between;
+    padding-block: 2rem;
+}
+
+#assentos .col.column-left,
+#assentos .col.column-right{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#assentos .rows{
+    display: flex;
+    align-items: end;
+}
+
+#assentos .rows .letra{
+    display: inline-block;
+    text-align: center;   
+    background-color: #e4e0e0;
+    color: #666;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 0.75rem;
+}
+
+.chair-left .letra{
+    margin-right: 0.3rem;
+}
+
+.chair-right .letra{
+    margin-left: 0.3rem;
+}
+
+#assentos .rows input{
+    all: unset;
+    font-size: 0;
+    border: 0;
+    margin: 0 0.1rem;
+    overflow: hidden;
+    cursor: pointer;
+    background: transparent;
+    display: inline-block;
+}
+
+#assentos .rows input:before{
+    /* content:'\f4b8'; */
+    content:'\f111';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    display: block;
+    font-size: 1.2rem;
+    /* color: rgb(15, 144, 15); */
+    color: #222;
+    transition: all 0.2s ease-in;
+}
+
+#assentos .rows input:hover:before{
+    color: #ff3356;
+}
+
+#assentos .rows input.wheelchair:before{
+    /* content:'\f4b8'; */
+    content:'\f193';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 10px;
+    background: #333;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    transition: all 0.2s ease-in;
+}
+
+#assentos .rows input.check-ok{
+    opacity: 0.5;
+    pointer-events: none; 
+}
+
+#assentos .rows input.check-ok:before{
+    color: rgb(162, 14, 14);
+}
+
+#assentos .rows input.selected:before{
+    content: '\f2bd';
+    color: rgb(232, 232, 33);  
+    font-size: 1.22rem;
+    /* color: rgb(232, 232, 33); */
+}
+
+#btnContainers{
+    display: flex;
+    justify-content: space-between;
+    margin-block: 1rem;
+}
+
+.btn{
+    border: 0;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+
+.btn:hover{
+    opacity: 0.8;
+}
+
+.btn.voltar{
+    background: #F4F4F4;
+    border: 1px solid #e9e6e6;
+}
+
+.btn.visualizar{
+    background: #ff3356;
+    color: #FFF;
+}
+
+.btn.finalizar{
+    background: #333;
+    color: #FFF;
+    margin-left: 1rem;
+}
+
+.legend{
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.legend h3{
+    margin-bottom: 1rem;
+    text-decoration: underline;
+}
+
+.legend span{
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.legend ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.legend ul li{
+    display: flex;
+    align-items: center;
+    margin-right: 1.2rem;
+}
+
+.legend ul li .icon{
+    margin-right: 1rem;
+}
+
+.legend ul li .icon-livre:before{
+    /* color: rgb(15, 144, 15); */
+    color: #222;
+}
+
+.legend ul li .icon-escolhido:before{
+    color: rgb(232, 232, 33);
+}
+
+.legend ul li .icon-oculpado:before{
+    /* color: rgb(212, 18, 18); */
+    color: #ff3356;
+}
+
+/*Ticket*/
+
+#containerTicket #close{
+    font-size: 1rem;
+    background: red;
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 9;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFF;
+    cursor: pointer;
+}
+
+#containerTicket{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #FFF;
+}
+
+.ticketImpresso{
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0;
+    grid-row-gap: 0px;
+}
+
+.ticketImpresso .rows{
+    margin-inline: 0.5rem;
+}
+
+.ticket{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 12px;
+    width: 100%;
+    background: #CCC;
+    padding-block: 1.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.ticket:before {
+    content: "";
+    display: block;
+    width: 101%;
+    height: 102%;
+    top: -2px;
+    bottom: -2px;
+    left: -2px;
+    right: -2px;
+    position: absolute;
+    border: 6px dotted #ff3356;
+    box-sizing: border-box;
+}
+
+.ticket .codigoBarras{
+    width: 30%;
+    transform: rotate(90deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+}
+
+.ticket .codigoBarras img{
+    width: 100%;
+}
+
+.ticket .codigoBarras .codigo{
+    font-size: 12px;
+    transform:rotate(180deg);
+}
+
+.ticket .description{
+    width: 60%;
+}
+
+.ticket .description .title{
+    background: #ff3356;
+    font-size: 1.5rem;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0.4rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    width: 100%;
+}
+
+.ticket .description .information{
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket .description .information span{
+    margin-bottom: 0.2rem;
+}
+
+.ticket .description .information span strong{
+    font-weight: bold;
+}
+
+.ticket .description .movie{
+    color: #ff3356;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Caprasimo', cursive;
+    font-size: 1rem;
+    margin-block: 0.5rem;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup){
+    width: 30%;
+}
+
+div:where(.swal2-icon){
+    width: 4rem;
+    height: 4rem;
+}
+
+div:where(.swal2-icon).swal2-info{
+    border-color: #ff3356;
+    color: #ff3356;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm{
+    background-color: #ff3356;
+}
